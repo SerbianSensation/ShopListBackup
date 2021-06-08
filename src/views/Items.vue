@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="pad">Shopping List Items:</h2>
+    <h2 class="pad">Shopping List Items</h2>
     <!-- v-for to go through all items !-->
     <v-flex v-for="item in items" :key="item.id">
       <!-- insert Item component (app-item because HTML tags translate it to kebab case) !-->
@@ -26,5 +26,10 @@ export default {
     };
   }
 };
+
+/* TODO:
+  Create an endpoint in the API to hold all the available (const) items
+  After the endpoint has been created, grab them from the API instead of from data/items.js
+ */
 
 </script>
