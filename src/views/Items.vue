@@ -3,9 +3,9 @@
     <h2 class="pad">Shopping List Items:</h2>
     <!-- v-for to go through all items !-->
     <v-flex v-for="item in items" :key="item.id">
-      <h3>{{ item.name }}</h3>
-      <p>Complete: {{ item.complete }}</p>
-      <br />
+      <!-- insert Item component (app-item because HTML tags translate it to kebab case) !-->
+      <!-- pass item to the Item component with :item="item" !-->
+      <app-item :item="item"></app-item>
     </v-flex>
   </div>
 </template>
@@ -13,8 +13,13 @@
 <script>
 //import items (to purchase) from data/items.js
 import { Items } from "../data/items";
+//import Item component
+import Item from "../components/Item";
 
 export default {
+  components: {
+    appItem: Item
+  },
   data() {
     return {
       items: Items
