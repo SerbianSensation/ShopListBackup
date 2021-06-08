@@ -19,15 +19,17 @@ export default new Vuex.Store({
     },
     updateItem(state, id, payload) {
       //filter out the item from cart list using id
-      //set the item to be updated's values to the payload's values with a PUT request
+      //set the item's values to the payload's values with a PUT request
     },
     updateName(state, id, payload) {
       //filter out the item from cart list using id
       //set item's name to the payload with a PATCH request
     },
-    updateComplete(state, id, payload) {
+    updateComplete(state, id) {
       //filter out the item from cart list using id
-      //set item's complete field to the payload with a PATCH request
+      const item = state.cart.find(item => item.id === id);
+      item.complete = !item.complete;
+      //reverse item's complete field with a PATCH request
     },
     updateOrder(state, id, payload) {
       //filter out the item from cart list using id
@@ -50,8 +52,8 @@ export default new Vuex.Store({
     updateName({ commit }, id, payload) {
       commit("updateName", id, payload);
     },
-    updateComplete({ commit }, id, payload) {
-      commit("updateComplete", id, payload);
+    updateComplete({ commit }, id) {
+      commit("updateComplete", id);
     },
     updateOrder({ commit }, id, payload) {
       commit("updateOrder", id, payload);
