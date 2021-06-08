@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    cart: []
+    cart: [],
+    currentItem: { id: -1, name: "currentItem", complete: false, order:-1 }
   },
   mutations: {
     addToCart(state, payload) {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
       //filter out the item from cart list using id
       //set item's order to the payload with a PATCH request
     },
+    updateCurrentItem(state, payload) {
+      state.currentItem = payload;
+    },
     clearCart(state) {
       state.cart = [];
     }
@@ -58,6 +62,9 @@ export default new Vuex.Store({
     updateOrder({ commit }, id, payload) {
       commit("updateOrder", id, payload);
     },
+    updateCurrentItem({ commit }, payload) {
+      commit("updateCurrentItem", payload);
+    },
     clearCart({ commit }) {
       commit("clearCart");
     }
@@ -70,6 +77,14 @@ export default new Vuex.Store({
     //get all non-completed items
     nonCompletedItems: (state) => {
       return state.cart.filter((item) => !item.complete);
+    },
+    //get the current item
+    currentItem: (state) => {
+      return state.currentItem;
     }
   }
 });
+
+/* TODO:
+Update the store actions to interact with the API
+ */

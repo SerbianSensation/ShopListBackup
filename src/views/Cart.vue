@@ -21,9 +21,9 @@
           <v-icon @click="updateComplete(item.id)">cancel</v-icon>
         </v-list-item-action>
 
-        <v-list-item-action>
-          <v-icon class="pad-left">edit</v-icon>
-        </v-list-item-action>
+        <router-link to="/edit-item">
+          <v-icon class="pad-left" @click="updateCurrentItem(item)">edit</v-icon>
+        </router-link>
 
         <v-list-item-action>
           <v-icon @click="removeFromCart(item)">delete</v-icon>
@@ -44,7 +44,8 @@ export default {
   },
   methods: {
     ...mapActions(["removeFromCart"]),
-    ...mapActions(["updateComplete"])
+    ...mapActions(["updateComplete"]),
+    ...mapActions(["updateCurrentItem"])
   }
 };
 </script>

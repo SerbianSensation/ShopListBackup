@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 import Items from '@/views/Items'
 import Cart from '@/views/Cart'
+import EditItem from '@/views/EditItem'
 
 Vue.use(Router)
 
@@ -19,6 +20,10 @@ export default new Router({
     {
       path: '/cart',
       component: Cart
+    },
+    {
+      path: '/edit-item',
+      component: EditItem
     }
   ]
 })
