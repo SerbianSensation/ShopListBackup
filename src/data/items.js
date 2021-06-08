@@ -10,15 +10,15 @@ export const Items = [
     id: 3, name: "Bread", complete: false, order:0
   },
   {
-    id: 4, name: "Cereal", complete: true, order:0
+    id: 4, name: "Cereal", complete: false, order:0
   },
   {
-    id: 5, name: "Oatmeal", complete: true, order:0
+    id: 5, name: "Oatmeal", complete: false, order:0
   },
   {
     id: 6, name: "Cookies", complete: false, order:0
   },
   {
-    id: 7, name: "Yogurt", complete: true, order:0
+    id: 7, name: "Yogurt", complete: false, order:0
   }
 ];

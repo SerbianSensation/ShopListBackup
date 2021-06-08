@@ -17,11 +17,11 @@
         </v-list-item-action>
 
         <v-list-item-action>
-          <v-icon>edit</v-icon>
+          <v-icon class="pad-left">edit</v-icon>
         </v-list-item-action>
 
         <v-list-item-action>
-          <v-icon>delete</v-icon>
+          <v-icon @click="removeFromCart(item)">delete</v-icon>
         </v-list-item-action>
 
       </v-list-item>
@@ -30,11 +30,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   computed: {
     cart() {
       return this.$store.state.cart;
     }
+  },
+  methods: {
+    ...mapActions(["removeFromCart"])
   }
 };
 </script>
+
+<style>
+.pad-left {
+  padding-left: 14px;
+}
+</style>
