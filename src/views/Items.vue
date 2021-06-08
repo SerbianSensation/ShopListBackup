@@ -5,12 +5,13 @@
     <v-flex v-for="item in items" :key="item.id">
       <!-- insert Item component (app-item because HTML tags translate it to kebab case) !-->
       <!-- pass item to the Item component with :item="item" !-->
-      <app-item :item="item"></app-item>
+      <app-item :item="item" @addToCart="addToCart"></app-item>
     </v-flex>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 //import items (to purchase) from data/items.js
 import { Items } from "../data/items";
 //import Item component
@@ -24,6 +25,9 @@ export default {
     return {
       items: Items
     };
+  },
+  methods: {
+    ...mapActions(["addToCart"])
   }
 };
 

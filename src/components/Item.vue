@@ -2,11 +2,12 @@
 <!-- This reduces the amount of code and makes it cleaner and easier to understand !-->
 
 <template>
-  <div>
-    <h3>{{ item.name }}</h3>
-    <p>Complete: {{ item.complete }}</p>
-    <br />
-  </div>
+  <v-card color="grey lighten-2">
+    <v-card-title>
+      <h3 class="pad-right">{{ item.name }}</h3>
+      <v-btn @click="$emit('addToCart', item)">Add to Cart</v-btn>
+    </v-card-title>
+  </v-card>
 </template>
 
 <script>
@@ -18,4 +19,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.pad-right {
+  padding-right: 12px;
+}
+</style>
 
