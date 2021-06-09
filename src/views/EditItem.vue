@@ -14,7 +14,7 @@
         <label for="undone">Incomplete</label>
       </div>
 
-      <v-btn @click="updateItemFields(currentItem.id, name, order, complete)" :disabled="!valid" to="/cart">Submit</v-btn>
+      <v-btn @click="submit()" :disabled="!valid">Submit</v-btn>
     </v-form>
   </div>
 </template>
@@ -44,7 +44,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["updateItemFields"])
+    ...mapActions(["updateItem"]),
+    submit() {
+      const item = {
+        id: this.currentItem.id,
+        name: this.name,
+        order: this.order,
+        complete: this.complete
+      }
+      this.updateItem(item);
+      //redirect to /cart
+      this.$router.push('/cart');
+    }
   }
 };
 

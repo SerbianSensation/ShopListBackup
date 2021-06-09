@@ -15,18 +15,10 @@ export default new Vuex.Store({
     removeFromCart(state, payload) {
       state.cart.splice(state.cart.indexOf(payload), 1);
     },
-    updateItemFields(state, id, name, order, complete) {
-      //get item from cart using id
-      const item = state.cart.find(item => item.id === id);
-      //update all of its fields
-      console.log("Item found:" + item);
-      item.name = name;
-      item.order = order;
-      item.complete = complete;
-      console.log("Item updated:" + item);
-    },
-    updateItem(state, id, payload) {
-      //filter out the item from cart list using id
+    updateItem(state, { item, index }) {
+      //update item in cart
+      Vue.set(state.cart, index, item);
+      //Vue.set preserves reactivity
     },
     updateName(state, id, payload) {
       //filter out the item from cart list using id
@@ -48,21 +40,30 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addToCart({ commit, state }, payload) {
+    addToCart({ commit, state }, item) {
+      //get item from cart using id
+      const findItem = state.cart.find(it => it.id === item.id);
       //only add the item to the cart if it isn't already there
-      if(!state.cart.includes(payload)) {
-        commit("addToCart", payload);
+      if(findItem === undefined) {
+        //make copy of object so the exact one from items.js isn't used
+        const copy = {...item};
+        commit("addToCart", copy);
       }
     },
     removeFromCart({ commit }, payload) {
       commit("removeFromCart", payload);
     },
-    updateItemFields({ commit }, id, name, order, complete){
-      commit("updateItemFields", id, name, order, complete);
-    },
-    updateItem({ commit }, id, payload) {
-      //set item's name to the payload with a PATCH request
-      commit("updateItem", id, payload);
+    updateItem({ commit, state }, item){
+      //get index of item from cart using id
+      const index = state.cart.findIndex(it => it.id === item.id);
+      const payload = {
+        item: item,
+        index: index
+      }
+      //if item exists, call mutator to update
+      if(index >= 0) {
+        commit("updateItem", payload);
+      }
     },
     updateName({ commit }, id, payload) {
       commit("updateName", id, payload);
