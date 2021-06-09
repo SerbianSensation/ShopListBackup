@@ -30,6 +30,8 @@
         </v-list-item-action>
 
       </v-list-item>
+      <!-- add button to clear cart !-->
+      <v-btn @click="clearCart()">Clear Cart</v-btn>
     </div>
   </v-list>
 </template>
@@ -45,7 +47,8 @@ export default {
   methods: {
     ...mapActions(["removeFromCart"]),
     ...mapActions(["updateComplete"]),
-    ...mapActions(["updateCurrentItem"])
+    ...mapActions(["updateCurrentItem"]),
+    ...mapActions(["clearCart"])
   }
 };
 </script>
