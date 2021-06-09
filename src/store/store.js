@@ -10,31 +10,35 @@ export default new Vuex.Store({
   },
   mutations: {
     addToCart(state, payload) {
-      //only add the item to the cart if it isn't already there
-      if (!state.cart.includes(payload)) {
-        state.cart.push(payload);
-      }
+      state.cart.push(payload);
     },
     removeFromCart(state, payload) {
       state.cart.splice(state.cart.indexOf(payload), 1);
     },
+    updateItemFields(state, id, name, order, complete) {
+      //get item from cart using id
+      const item = state.cart.find(item => item.id === id);
+      //update all of its fields
+      console.log("Item found:" + item);
+      item.name = name;
+      item.order = order;
+      item.complete = complete;
+      console.log("Item updated:" + item);
+    },
     updateItem(state, id, payload) {
       //filter out the item from cart list using id
-      //set the item's values to the payload's values with a PUT request
     },
     updateName(state, id, payload) {
       //filter out the item from cart list using id
-      //set item's name to the payload with a PATCH request
     },
     updateComplete(state, id) {
       //filter out the item from cart list using id
       const item = state.cart.find(item => item.id === id);
+      //flip its complete field
       item.complete = !item.complete;
-      //reverse item's complete field with a PATCH request
     },
     updateOrder(state, id, payload) {
       //filter out the item from cart list using id
-      //set item's order to the payload with a PATCH request
     },
     updateCurrentItem(state, payload) {
       state.currentItem = payload;
@@ -44,22 +48,31 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addToCart({ commit }, payload) {
-      commit("addToCart", payload);
+    addToCart({ commit, state }, payload) {
+      //only add the item to the cart if it isn't already there
+      if(!state.cart.includes(payload)) {
+        commit("addToCart", payload);
+      }
     },
     removeFromCart({ commit }, payload) {
       commit("removeFromCart", payload);
     },
+    updateItemFields({ commit }, id, name, order, complete){
+      commit("updateItemFields", id, name, order, complete);
+    },
     updateItem({ commit }, id, payload) {
+      //set item's name to the payload with a PATCH request
       commit("updateItem", id, payload);
     },
     updateName({ commit }, id, payload) {
       commit("updateName", id, payload);
     },
     updateComplete({ commit }, id) {
+      //reverse item's complete field with a PATCH request
       commit("updateComplete", id);
     },
     updateOrder({ commit }, id, payload) {
+      //set item's order to the payload with a PATCH request
       commit("updateOrder", id, payload);
     },
     updateCurrentItem({ commit }, payload) {
