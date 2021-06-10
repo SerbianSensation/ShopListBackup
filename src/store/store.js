@@ -87,7 +87,7 @@ export default new Vuex.Store({
       let cartItem = state.cart.find(i => i.name === item.name);
       let listItem = Items.find(i => i.name === item.name);
 
-      //if it is, check ids
+      //if item is either in the cart or list, check for different IDs
       if(cartItem !== undefined) {
         //item with same name but different id is already in cart
         if (cartItem.id !== item.id) {
@@ -171,6 +171,7 @@ export default new Vuex.Store({
           })
           .catch((error) => {
             console.log(error);
+            alert("Could not clear cart. Something went wrong, try again later.");
           })
       });
     },
@@ -182,6 +183,7 @@ export default new Vuex.Store({
         })
         .catch((error) => {
           console.log(error);
+          alert("Could not get cart. Something went wrong, try again later.");
         });
     }
   },
