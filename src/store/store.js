@@ -21,7 +21,7 @@ export default new Vuex.Store({
       state.cart.splice(state.cart.indexOf(item), 1);
     },
     setCart(state, items) {
-      state.cart = items;
+      Vue.set(state, 'cart', [...items]);
     },
     updateItem(state, { item, index }) {
       //update item in cart
