@@ -44,25 +44,26 @@ export default new Vuex.Store({
   },
   actions: {
     addToCart({ commit, state }, item) {
-      //POST to API
-      axios.post(baseURL, item)
-        .then(() => {
-          //get item from cart using id
-          const findItem = state.cart.find(it => it.id === item.id);
-          //only add the item to the cart if it isn't already there
-          if(findItem === undefined) {
+      //search item in cart using id
+      const findItem = state.cart.find(it => it.id === item.id);
+      //only add the item to the cart if it isn't already there
+      if(findItem === undefined) {
+        //POST to API
+        axios.post(baseURL, item)
+          .then(() => {
             //make copy of object so the exact one from items.js isn't used
             const copy = {...item};
+            //add to store cart
             commit("addToCart", copy);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
     removeFromCart({ commit }, item) {
       //DELETE to API (baseURL/:id)
-      axios.delete(baseURL + "/" + item.id, item)
+      axios.delete(baseURL + "/" + item.id)
         .then(() => {
           commit("removeFromCart", item);
         })
