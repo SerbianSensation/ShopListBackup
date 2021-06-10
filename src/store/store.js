@@ -136,7 +136,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    /* //get all completed items
+    //get all completed items
     completedItems: (state) => {
       return state.cart.filter((item) => item.complete);
     },
@@ -144,7 +144,6 @@ export default new Vuex.Store({
     nonCompletedItems: (state) => {
       return state.cart.filter((item) => !item.complete);
     },
-    */
     //get the current item
     currentItem: (state) => {
       return state.currentItem;

@@ -35,9 +35,6 @@ import {mapState} from "vuex";
 export default {
   name: 'App',
   computed: {
-    /* cart() {
-      return this.$store.state.cart;
-    } */
     ...mapState(['cart'])
   },
   mounted() {
