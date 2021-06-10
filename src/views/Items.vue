@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 //import items (to purchase) from data/items.js
 import { Items } from "../data/items";
 //import Item component
@@ -28,6 +28,13 @@ export default {
   },
   methods: {
     ...mapActions(["addToCart"])
+  },
+  /* preserves cart.length when refreshing */
+  computed: {
+    ...mapState(['cart'])
+  },
+  mounted() {
+    this.$store.dispatch("getCart");
   }
 };
 
