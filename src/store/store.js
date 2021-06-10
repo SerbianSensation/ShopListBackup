@@ -58,7 +58,10 @@ export default new Vuex.Store({
           })
           .catch((error) => {
             console.log(error);
+            alert("Unable to add the item to the cart. Something went wrong, try again later.");
           });
+      } else {
+        alert("Item is already in the cart!");
       }
     },
     removeFromCart({ commit }, item) {
@@ -69,6 +72,7 @@ export default new Vuex.Store({
         })
         .catch((error) => {
           console.log(error);
+          alert("Unable to remove item from the cart. Something went wrong, try again later.");
         });
     },
     updateItem({ commit, state }, item){
@@ -88,6 +92,7 @@ export default new Vuex.Store({
         })
         .catch((error) => {
           console.log(error);
+          alert("Item could not be updated. Something went wrong, try again later.");
         });
     },
     updateComplete({ commit, state }, id) {
@@ -100,6 +105,7 @@ export default new Vuex.Store({
         })
         .catch((error) => {
           console.log(error);
+          alert("Item could not be marked as complete/incomplete. Something went wrong, try again later.");
         });
     },
     updateOrder({ commit }, id, payload) {
@@ -155,7 +161,3 @@ export default new Vuex.Store({
   },
 });
 
-
-/* TODO:
-Update the store actions to interact with the API
- */

@@ -68,6 +68,11 @@ Ex: Eggs (id: 1) are added to the cart, then name is changed to milk (still id 1
     Now eggs (id 1) have the same name as milk (id 1)
 
     Also, milk could now be added twice because the id's don't match, so they are not the same item (technically)
+
+    UPDATE: Item is distinguished by id in store, so as a result it is not added, since it is considered a dup.
+    Ex: Add eggs to cart. Rename to milk. Try adding eggs to cart again. Won't work because eggs and the edited 'milk'
+        have the same id, so they are considered dups. Check store.js to see, find is done on the list using id.
+
  */
 </script>
 
