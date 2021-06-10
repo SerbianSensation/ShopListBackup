@@ -44,7 +44,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["updateItem"]),
+    ...mapActions(["checkItem"]),
     submit() {
       const item = {
         id: this.currentItem.id,
@@ -52,7 +52,7 @@ export default {
         order: this.order,
         complete: this.complete
       }
-      this.updateItem(item);
+      this.checkItem(item);
       //redirect to /cart
       this.$router.push('/cart');
     }

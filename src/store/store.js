@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+//import items (to purchase) from data/items.js
+import { Items } from "../data/items";
 
 Vue.use(Vuex);
 
@@ -75,7 +77,39 @@ export default new Vuex.Store({
           alert("Unable to remove item from the cart. Something went wrong, try again later.");
         });
     },
-    updateItem({ commit, state }, item){
+    checkItem({ commit, state, dispatch }, item){
+      /* Error checking
+         Make sure name was not set to the name of another item in the cart or items list
+       */
+      //check to see if new item is in cart or items list using name
+      let cartItem = state.cart.find(i => i.name === item.name);
+      let listItem = Items.find(i => i.name === item.name);
+
+      //if it is, check ids
+      if(cartItem !== undefined) {
+        //item with same name but different id is already in cart
+        if (cartItem.id !== item.id) {
+          alert("Item with the same name already exists in the cart!");
+        } else {
+          //else, the item was renamed to itself, so it is ok
+          dispatch("updateItem", item);
+        }
+      }
+      else if(listItem !== undefined) {
+        //item with same name but different id is already in the list
+        if (listItem.id !== item.id) {
+          alert("Item with the same name already exists in the items list. Please add it from there.");
+        } else {
+          //else, the item was renamed to itself, so it is ok
+          dispatch("updateItem", item);
+        }
+      }
+      //if item is not in cart or items, proceed
+      else {
+        dispatch("updateItem", item);
+      }
+    },
+    updateItem({ commit, state }, item) {
       //PUT to API (baseURL/:id)
       axios.put(baseURL + "/" + item.id, item)
         .then(() => {
@@ -99,7 +133,7 @@ export default new Vuex.Store({
       //filter out the item from cart list using id
       const item = state.cart.find(item => item.id === id);
       //PATCH to API (baseURL/:id)
-      axios.patch(baseURL + "/" + id, { complete: !item.complete})
+      axios.patch(baseURL + "/" + id, { complete: !item.complete })
         .then(() => {
           commit("updateComplete", id);
         })
@@ -123,13 +157,11 @@ export default new Vuex.Store({
         axios.delete(baseURL + "/" + item.id)
           .then(() => {
             commit("removeFromCart", item);
-            //just clear after?
           })
           .catch((error) => {
             console.log(error);
           })
       });
-      //commit("clearCart");
     },
     getCart({ commit }) {
       axios.get(baseURL)
