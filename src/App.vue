@@ -30,12 +30,18 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: 'App',
   computed: {
-    cart() {
+    /* cart() {
       return this.$store.state.cart;
-    }
+    } */
+    ...mapState(['cart'])
+  },
+  mounted() {
+    this.$store.dispatch("getCart");
   }
 }
 </script>

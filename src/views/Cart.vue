@@ -38,17 +38,24 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { mapState } from 'vuex';
+
 export default {
   computed: {
-    cart() {
+    /*cart() {
       return this.$store.state.cart;
-    }
+      //return this.getCart();  <= doesn't work (since void)
+    },*/
+    ...mapState(['cart'])
   },
   methods: {
     ...mapActions(["removeFromCart"]),
     ...mapActions(["updateComplete"]),
     ...mapActions(["updateCurrentItem"]),
     ...mapActions(["clearCart"])
+  },
+  mounted() {
+    this.$store.dispatch("getCart");
   }
 };
 </script>

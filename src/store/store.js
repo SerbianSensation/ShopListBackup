@@ -18,6 +18,9 @@ export default new Vuex.Store({
     removeFromCart(state, item) {
       state.cart.splice(state.cart.indexOf(item), 1);
     },
+    setCart(state, items) {
+      state.cart = items;
+    },
     updateItem(state, { item, index }) {
       //update item in cart
       Vue.set(state.cart, index, item);
@@ -105,12 +108,35 @@ export default new Vuex.Store({
     updateCurrentItem({ commit }, payload) {
       commit("updateCurrentItem", payload);
     },
-    clearCart({ commit }) {
-      commit("clearCart");
+    clearCart({ commit, state }) {
+      const items = state.cart;
+      //loop through the array, calling axios delete on each item in API
+      items.forEach(function(item) {
+        //DELETE to API (baseURL/:id)
+        axios.delete(baseURL + "/" + item.id)
+          .then(() => {
+            commit("removeFromCart", item);
+            //just clear after?
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      });
+      //commit("clearCart");
+    },
+    getCart({ commit }) {
+      axios.get(baseURL)
+        .then((response) => {
+          console.log(response.data);
+          commit("setCart", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   },
   getters: {
-    //get all completed items
+    /* //get all completed items
     completedItems: (state) => {
       return state.cart.filter((item) => item.complete);
     },
@@ -118,9 +144,13 @@ export default new Vuex.Store({
     nonCompletedItems: (state) => {
       return state.cart.filter((item) => !item.complete);
     },
+    */
     //get the current item
     currentItem: (state) => {
       return state.currentItem;
+    },
+    cart: state => {
+      return state.cart;
     }
   },
 });
