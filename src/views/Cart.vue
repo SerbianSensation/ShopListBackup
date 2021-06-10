@@ -12,7 +12,11 @@
         <v-list-item-content>Quantity: {{ item.order }}</v-list-item-content>
 
         <v-list-item-action>
-          <v-icon @click="updateComplete(item.id)">check_circle</v-icon>
+          <v-icon @click="incOrder(item.id)">add_circle</v-icon>
+        </v-list-item-action>
+
+        <v-list-item-action>
+          <v-icon class="pad-left" @click="updateComplete(item.id)">check_circle</v-icon>
         </v-list-item-action>
 
         <router-link to="/edit-item">
@@ -33,7 +37,11 @@
         <v-list-item-content>Quantity: {{ item.order }}</v-list-item-content>
 
         <v-list-item-action>
-          <v-icon @click="updateComplete(item.id)">cancel</v-icon>
+          <v-icon @click="incOrder(item.id)">add_circle</v-icon>
+        </v-list-item-action>
+
+        <v-list-item-action>
+          <v-icon class="pad-left" @click="updateComplete(item.id)">cancel</v-icon>
         </v-list-item-action>
 
         <router-link to="/edit-item">
@@ -60,7 +68,7 @@ export default {
     ...mapGetters(['completedItems', 'nonCompletedItems'])
   },
   methods: {
-    ...mapActions(["removeFromCart", "updateComplete", "updateCurrentItem", "clearCart"])
+    ...mapActions(["removeFromCart", "updateComplete", "updateCurrentItem", "clearCart", "incOrder"])
   },
   mounted() {
     this.$store.dispatch("getCart");

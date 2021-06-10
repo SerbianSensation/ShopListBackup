@@ -34,7 +34,7 @@ export default new Vuex.Store({
       //flip its complete field
       item.complete = !item.complete;
     },
-    updateOrder(state, id, payload) {
+    incOrder(state, id, payload) {
       //filter out the item from cart list using id
     },
     updateCurrentItem(state, payload) {
@@ -142,9 +142,18 @@ export default new Vuex.Store({
           alert("Item could not be marked as complete/incomplete. Something went wrong, try again later.");
         });
     },
-    updateOrder({ commit }, id, payload) {
-      //set item's order to the payload with a PATCH request
-      commit("updateOrder", id, payload);
+    incOrder({ commit, state }, id,) {
+      //filter out the item from cart list using id
+      const item = state.cart.find(item => item.id === id);
+      //PATCH to API (baseURL/:id)
+      axios.patch(baseURL + "/" + id, { order: ++item.order })
+        .then(() => {
+          commit("incOrder", id);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Item quantity could not be incremented. Something went wrong, try again later.");
+        });
     },
     updateCurrentItem({ commit }, payload) {
       commit("updateCurrentItem", payload);
