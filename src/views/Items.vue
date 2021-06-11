@@ -34,8 +34,6 @@ export default {
     ...mapActions(["addToCart"])
   },
   computed: {
-    // preserves cart.length when refreshing
-    ...mapState(['cart']),
     filteredItems: function () {
       //return items matching the current filter in search bar
       return this.items.filter((item) => {
@@ -43,10 +41,6 @@ export default {
       })
     }
   },
-  /*
-  mounted() {
-    this.$store.dispatch("getCart");
-  } */
 };
 
 /* TODO:

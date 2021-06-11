@@ -6,17 +6,3 @@
   </div>
 </template>
 
-<script>
-/*
-import {mapState} from "vuex";
-
-// Need to make get call to API here so on the home page the cart.length is correct when refreshing
-export default {
-  computed: {
-    ...mapState(['cart'])
-  },
-  mounted() {
-    this.$store.dispatch("getCart");
-  }
-} */
-</script>
