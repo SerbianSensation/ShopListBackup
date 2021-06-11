@@ -1,9 +1,9 @@
 <template>
   <div class="form-wrapper">
     <v-form v-model="valid">
-      <v-text-field label="Item" required :rules="nameRules" v-model="name" :placeholder="currentItem.name"></v-text-field>
+      <v-text-field label="Item" required :rules="nameRules" v-model="name" :placeholder="item.name"></v-text-field>
       <!-- require a number for the quantity (order) field !-->
-      <v-text-field type="number" label="Quantity" required :rules="quantityRules" v-model="order" :placeholder="currentItem.order.toString()"></v-text-field>
+      <v-text-field type="number" label="Quantity" required :rules="quantityRules" v-model="order" :placeholder="item.order.toString()"></v-text-field>
 
       <!-- radio buttons for complete/incomplete !-->
       <div>
@@ -38,16 +38,19 @@ export default {
       ]
     };
   },
+  created() {
+    this.getItem(this.$route.params.id);
+  },
   computed: {
-    currentItem() {
-      return this.$store.state.currentItem;
+    item() {
+      return this.$store.state.item;
     }
   },
   methods: {
     ...mapActions(["checkItem"]),
     submit() {
       const item = {
-        id: this.currentItem.id,
+        id: this.item.id,
         name: this.name,
         order: this.order,
         complete: this.complete

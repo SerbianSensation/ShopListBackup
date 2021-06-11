@@ -23,7 +23,7 @@
         </v-list-item-action>
 
         <router-link to="/edit-item">
-          <v-icon class="pad-left" @click="updateCurrentItem(item)">edit</v-icon>
+          <v-icon class="pad-left" :to="{ name: 'editForm', params: {id: item.id } }">edit</v-icon>
         </router-link>
 
         <v-list-item-action>
@@ -51,7 +51,7 @@
         </v-list-item-action>
 
         <router-link to="/edit-item">
-          <v-icon class="pad-left" @click="updateCurrentItem(item)">edit</v-icon>
+          <v-btn icon class="pad-left" :to="{ name: 'editForm', params: {id: item.id } }"><v-icon>edit</v-icon></v-btn>
         </router-link>
 
         <v-list-item-action>
