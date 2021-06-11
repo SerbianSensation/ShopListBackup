@@ -22,8 +22,9 @@ export default new Router({
       component: Cart
     },
     {
-      path: '/edit-item',
-      component: EditItem
+      path: '/edit-item/:id',
+      component: EditItem,
+      name: 'editForm'
     }
   ]
 })

@@ -11,7 +11,7 @@ const baseURL = "http://localhost:3000/items";
 export default new Vuex.Store({
   state: {
     cart: [],
-    currentItem: { id: -1, name: "currentItem", complete: false, order:-1 }
+    item: { id: -1, name: "item", complete: false, order:-1 }
   },
   mutations: {
     addToCart(state, payload) {
@@ -22,6 +22,9 @@ export default new Vuex.Store({
     },
     setCart(state, items) {
       Vue.set(state, 'cart', [...items]);
+    },
+    setItem(state, item) {
+      state.item = item;
     },
     updateItem(state, { item, index }) {
       //update item in cart
@@ -40,7 +43,7 @@ export default new Vuex.Store({
       item.order += 1;
     },
     updateCurrentItem(state, payload) {
-      state.currentItem = payload;
+      state.item = payload;
     },
     clearCart(state) {
       state.cart = [];
@@ -185,6 +188,17 @@ export default new Vuex.Store({
           console.log(error);
           alert("Could not get cart. Something went wrong, try again later.");
         });
+    },
+    getItem({ commit }, id) {
+      axios.get(baseURL + "/" + id)
+        .then((response) => {
+          console.log(response.data);
+          commit("setItem", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Could not get the item. Something went wrong, try again later.");
+        });
     }
   },
   getters: {
@@ -197,8 +211,8 @@ export default new Vuex.Store({
       return state.cart.filter((item) => !item.complete);
     },
     //get the current item
-    currentItem: (state) => {
-      return state.currentItem;
+    item: (state) => {
+      return state.item;
     },
     cart: state => {
       return state.cart;
