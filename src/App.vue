@@ -15,7 +15,7 @@
         <!-- use a shopping cart icon to link to the cart !-->
         <!-- also include a badge showing the number of items in the cart !-->
         <router-link to="/cart">
-          <v-badge color="grey lighten-1" overlap right v-model="cart.length">
+          <v-badge color="grey lighten-1" overlap right :value="cart.length">
             <template #badge>
               {{cart.length}}
             </template>

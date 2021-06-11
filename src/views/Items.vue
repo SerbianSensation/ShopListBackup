@@ -43,9 +43,10 @@ export default {
       })
     }
   },
+  /*
   mounted() {
     this.$store.dispatch("getCart");
-  }
+  } */
 };
 
 /* TODO:
