@@ -47,7 +47,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["checkItem"]),
+    ...mapActions(["checkItem", "getItem"]),
     submit() {
       const item = {
         id: this.item.id,
