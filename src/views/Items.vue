@@ -39,7 +39,7 @@ export default {
     filteredItems: function () {
       //return items matching the current filter in search bar
       return this.items.filter((item) => {
-        return item.name.match(this.search);
+        return item.name.toLowerCase().match(this.search.toLowerCase());
       })
     }
   },

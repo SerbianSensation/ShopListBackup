@@ -82,13 +82,13 @@ export default {
     filterCompleteItems: function () {
       //return items matching the current filter in search bar
       return this.completedItems.filter((item) => {
-        return item.name.match(this.searchComplete);
+        return item.name.toLowerCase().match(this.searchComplete.toLowerCase());
       })
     },
     filterIncompleteItems: function () {
       //return items matching the current filter in search bar
       return this.nonCompletedItems.filter((item) => {
-        return item.name.match(this.searchIncomplete);
+        return item.name.toLowerCase().match(this.searchIncomplete.toLowerCase());
       })
     }
   },
