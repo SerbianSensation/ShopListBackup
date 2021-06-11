@@ -22,7 +22,9 @@
           <v-icon class="pad-left" @click="updateComplete(item.id)">check_circle</v-icon>
         </v-list-item-action>
 
-        <v-btn class="pad-left" :to="{ name: 'editForm', params: {id: item.id } }"><v-icon>edit</v-icon></v-btn>
+        <v-list-item-action>
+          <v-btn icon class="pad-left" :to="{ name: 'editForm', params: {id: item.id } }"><v-icon>edit</v-icon></v-btn>
+        </v-list-item-action>
 
         <v-list-item-action>
           <v-icon @click="removeFromCart(item)">delete</v-icon>
@@ -48,7 +50,9 @@
           <v-icon class="pad-left" @click="updateComplete(item.id)">cancel</v-icon>
         </v-list-item-action>
 
-        <v-btn icon class="pad-left" :to="{ name: 'editForm', params: {id: item.id } }"><v-icon>edit</v-icon></v-btn>
+        <v-list-item-action>
+          <v-btn icon class="pad-left" :to="{ name: 'editForm', params: {id: item.id } }"><v-icon>edit</v-icon></v-btn>
+        </v-list-item-action>
 
         <v-list-item-action>
           <v-icon @click="removeFromCart(item)">delete</v-icon>
